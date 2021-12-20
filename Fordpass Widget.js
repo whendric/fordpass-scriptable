@@ -11,7 +11,7 @@
  * OF THIS SOFTWARE.
  *
  *
- * This is a widget for the iOS/iPad/MacOS app named Scriptable https://scriptable.app/ created by Anthony Santilli (https://github.com/tonesto7)
+ * This is a widget for the iOS/iPad/MacOS app named Scriptable https://scriptable.app/ created by Anthony Santilli (https://github.com/whendric)
  *
  * Fuel pump Icon made by Kiranshastry from www.flaticon.com
  *
@@ -2436,7 +2436,7 @@ async function getImage(image) {
         return fm.readImage(path);
     } else {
         // download once
-        let repoPath = 'https://raw.githubusercontent.com/tonesto7/fordpass-scriptable/main/icons/';
+        let repoPath = 'https://raw.githubusercontent.com/whendric/fordpass-scriptable/main/icons/';
         let imageUrl;
         switch (image) {
             case 'gas-station_light.png':
@@ -2446,7 +2446,7 @@ async function getImage(image) {
                 imageUrl = 'https://i.imgur.com/hgYWYC0.png';
                 break;
             default:
-                imageUrl = 'https://raw.githubusercontent.com/tonesto7/fordpass-scriptable/main/icons/' + image;
+                imageUrl = 'https://raw.githubusercontent.com/whendric/fordpass-scriptable/main/icons/' + image;
             // console.log(`FP: Sorry, couldn't find a url for ${image}.`);
         }
         let iconImage = await loadImage(imageUrl);
@@ -2556,7 +2556,7 @@ async function clearFileManager() {
 }
 
 async function getLatestScriptVersion() {
-    let req = new Request(`https://raw.githubusercontent.com/tonesto7/fordpass-scriptable/main/latest.json`);
+    let req = new Request(`https://raw.githubusercontent.com/whendric/fordpass-scriptable/main/latest.json`);
     req.headers = {
         'Content-Type': 'application/json',
         'Accept-Language': 'en-US,en;q=0.9',
