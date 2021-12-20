@@ -205,13 +205,13 @@ const textValues = (str) => {
             noCredentials: 'Missing Login Credentials',
             noVin: 'VIN Missing',
             cmd_err_590: 'Command Failed!\n\nVehicle failed to start. You must start from inside your vehicle after two consecutive remote start events. ',
-            cmd_err: `There was an error sending the command to the vehicle!\n`,
+            cmd_err: 'There was an error sending the command to the vehicle!\n',
         },
         successMessages: {
             locks_cmd_title: 'Lock Command',
             locked_msg: 'Vehicle Received Lock Command Successfully',
             unlocked_msg: 'Vehicle Received Unlock Command Successfully',
-            cmd_success: `Vehicle Received Command Successfully`,
+            cmd_success: 'Vehicle Received Command Successfully',
         },
     };
 };
@@ -255,7 +255,7 @@ const sizeMap = {
     },
     small: {
         titleFontSize: 9,
-        detailFontSizeSmall: 8,
+        detailFontSizeSmall: 9,
         detailFontSizeMedium: 9,
         detailFontSizeBig: 19,
         barWidth: 80,
@@ -417,7 +417,7 @@ async function createMediumWidget(vData) {
     // Creates the Ignition Status Elements
     await createIgnitionStatusElement(mainCol3, vehicleData);
 
-    // Creates the Door Status Elements
+    // Creates the Window Status Elements
     await createWindowElement(mainCol3, vehicleData);
 
     // Creates the Vehicle Location Element
@@ -730,8 +730,10 @@ async function createEvChargeElement(srcField, vehicleData) {
 async function createDoorElement(srcField, vData, countOnly = false) {
     const styles = {
         normTxt: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color(runtimeData.textColor2), lineLimit: 1 },
-        statOpen: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('FF5733') },
-        statClosed: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0') },
+        statOpen: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF0000') },
+//        statOpen: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('FF5733') },        
+        statClosed: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#00FF00') },
+//        statClosed: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0') },
         offset: 5,
     };
 
@@ -786,7 +788,7 @@ async function createDoorElement(srcField, vData, countOnly = false) {
         }
 
         async function getHoodStatusElem(stkElem, data, center = false) {
-            await createText(stkElem, `${center ? '       ' : ''}HD (`, styles.normTxt);
+            await createText(stkElem, `${center ? '       ' : ''}HD(`, styles.normTxt);
             await createText(stkElem, data.statusDoors.hood ? textValues().symbols.open : textValues().symbols.closed, vData.statusDoors.hood ? styles.statOpen : styles.statClosed);
             await createText(stkElem, ')', styles.normTxt);
         }
@@ -826,8 +828,10 @@ async function createDoorElement(srcField, vData, countOnly = false) {
 async function createWindowElement(srcField, vData, countOnly = false) {
     const styles = {
         normTxt: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color(runtimeData.textColor2) },
-        statOpen: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('FF5733') },
-        statClosed: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0') },
+        statOpen: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF0000') },
+//        statOpen: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('FF5733') },
+        statClosed: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#00FF00') },
+//        statClosed: { font: Font.heavySystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0') },
         offset: 10,
     };
 
@@ -879,7 +883,7 @@ async function createWindowElement(srcField, vData, countOnly = false) {
         }
 
         if (vData.statusDoors['tailgate'] !== undefined || vData.statusDoors['hood'] !== undefined) {
-            offset = offset + 10;
+            offset = offset + 5;
         }
     }
     srcField.addSpacer(offset);
@@ -932,8 +936,10 @@ async function createPositionElement(srcField, vehicleData) {
 
 async function createLockStatusElement(srcField, vehicleData) {
     const styles = {
-        statOpen: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF5733'), lineLimit: 1 },
-        statClosed: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0'), lineLimit: 1 },
+        statOpen: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF0000'), lineLimit: 1 },
+//        statOpen: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF5733'), lineLimit: 1 },
+        statClosed: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#00FF00'), lineLimit: 1 },
+//        statClosed: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0'), lineLimit: 1 },
     };
     let offset = 5;
     let titleFld = await createRow(srcField);
@@ -947,8 +953,10 @@ async function createLockStatusElement(srcField, vehicleData) {
 
 async function createIgnitionStatusElement(srcField, vehicleData) {
     const styles = {
-        statOn: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF5733') },
-        statOff: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0') },
+        statOn: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF0000') },
+//        statOn: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#FF5733') },
+        statOff: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#00FF00') },
+//        statOff: { font: Font.mediumSystemFont(sizeMap[screenType].detailFontSizeMedium), textColor: new Color('#5A65C0') },
     };
     let remStartOn = vehicleData.remoteStartStatus && vehicleData.remoteStartStatus.running ? true : false;
     let status = '';
@@ -1046,13 +1054,13 @@ async function getMainMenuItems(vehicleData) {
             show: true,
         },
         {
-            title: 'View Info',
+            title: 'View Advanced Info',
             action: async () => {
                 console.log('(Main Menu) View Info was pressed');
                 await subControlMenu('advancedInfo');
             },
             destructive: false,
-            show: false,
+            show: true,
         },
         {
             title: 'Lock Vehicle',
@@ -1073,7 +1081,7 @@ async function getMainMenuItems(vehicleData) {
             show: true,
         },
         {
-            title: 'Remote Start (Stop)',
+            title: 'Remote Stop Vehicle',
             action: async () => {
                 console.log('(Main Menu) Stop was pressed');
                 await sendVehicleCmd('stop');
@@ -1082,7 +1090,7 @@ async function getMainMenuItems(vehicleData) {
             show: true,
         },
         {
-            title: 'Remote Start (Run)',
+            title: 'Remote Start Vehicle',
             action: async () => {
                 console.log('(Main Menu) Start was pressed');
                 await sendVehicleCmd('start');
@@ -1183,7 +1191,7 @@ async function subControlMenu(type) {
             title = 'Advanced Controls';
             items = [
                 {
-                    title: 'ZoneLighting Control',
+                    title: 'Zone Lighting',
                     action: async () => {
                         console.log('(Advanced Controls Menu) Zone Lighting was pressed');
                         await subControlMenu('zoneLighting');
@@ -1192,7 +1200,7 @@ async function subControlMenu(type) {
                     show: caps && caps.length && (caps.includes('ZONE_LIGHTING_FOUR_ZONES') || caps.includes('ZONE_LIGHTING_TWO_ZONES')),
                 },
                 {
-                    title: 'SecuriAlert Control',
+                    title: 'SecuriAlert',
                     action: async () => {
                         console.log('(Advanced Controls Menu) SecuriAlert was pressed');
                         await subControlMenu('securiAlert');
@@ -1228,7 +1236,7 @@ async function subControlMenu(type) {
                     action: async () => {
                         console.log('(Debug Menu) Copy Data was pressed');
                         let data = await fetchVehicleData(true);
-                        data = scrubPersonalData(data);
+                        //data = scrubPersonalData(data);
                         await Pasteboard.copyString(JSON.stringify(data, null, 4));
                         await showAlert('Debug Menu', 'Vehicle Data Copied to Clipboard');
                         subControlMenu('debugMenu');
@@ -1283,7 +1291,7 @@ async function subControlMenu(type) {
                 {
                     title: `SecuriAlert Status: ${(await getSecuriAlertStatus()) === 'enable' ? 'Enabled' : 'Disabled'}`,
                     action: async () => {
-                        console.log('(Advanced Controls Menu) Zone Lighting was pressed');
+                        console.log('(Advanced Controls Menu) Advanced Info was pressed');
                         subControlMenu('advancedInfo');
                     },
                     destructive: false,
@@ -1301,20 +1309,20 @@ async function subControlMenu(type) {
             ];
             break;
         case 'zoneLighting':
-            title = 'Zone Lighting Control';
+            title = 'Zone Lighting';
             message = '';
             items = [
                 {
-                    title: 'Turn On All ZoneLighting',
+                    title: 'Turn On All Zone Lighting',
                     action: async () => {
                         console.log('(Zone Lighting Menu) On was pressed');
                         await sendVehicleCmd('zone_lights_on');
                     },
-                    destructive: false,
+                    destructive: true,
                     show: true,
                 },
                 {
-                    title: 'Turn Off All ZoneLighting',
+                    title: 'Turn Off All Zone Lighting',
                     action: async () => {
                         console.log('(Zone Lighting Menu) Off was pressed');
                         await sendVehicleCmd('zone_lights_off');
@@ -1334,7 +1342,7 @@ async function subControlMenu(type) {
             ];
             break;
         case 'securiAlert':
-            title = 'SecuriAlert Control';
+            title = 'SecuriAlert';
             message = '';
             items = [
                 {
@@ -1367,7 +1375,7 @@ async function subControlMenu(type) {
             ];
             break;
         case 'trailerLightCheck':
-            title = 'Trailer Lighting Check Control';
+            title = 'Trailer Lighting Check';
             message = '';
             items = [
                 {
@@ -1424,7 +1432,7 @@ async function subControlMenu(type) {
 
 async function showDataWebView(title, heading, data) {
     // console.log(`showDataWebView(${title}, ${heading}, ${data})`);
-    data = scrubPersonalData(data);
+//     data = scrubPersonalData(data);
     console.log('showDataWebView() | DarkMode: ' + Device.isUsingDarkAppearance());
     const bgColor = darkMode ? '#242424' : 'white';
     const fontColor = darkMode ? '#ffffff' : '#242425';
@@ -1433,7 +1441,7 @@ async function showDataWebView(title, heading, data) {
         <html>
         <head>
             <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+            <meta name="viewport" content="width=device-width; initial-scale=0.5; maximum-scale=1.0;"/>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
             <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
             <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet"/>
@@ -1449,7 +1457,7 @@ async function showDataWebView(title, heading, data) {
         <body>
             <div class="mx-2">
                 <h3>${heading}</h3>
-                <p style="color: orange;">(Personal Data Removed)</p>
+                <p style="color: orange;">(Personal Data Included)</p>
             </div>
             <div class="ml-3" id="wrapper">
                 <pre>${JSON.stringify(data, null, 4)}</pre>
@@ -1961,7 +1969,7 @@ const vehicleCmdConfigs = (vin) => {
             ],
         },
         zone_lights_off: {
-            desc: 'Zone Off Zone Lighting (All Lights)',
+            desc: 'Turn Off Zone Lighting (All Lights)',
             cmds: [
                 {
                     uri: `${baseUrl}/vehicles/${vin}/zonelightingactivation`,
@@ -2243,10 +2251,10 @@ async function fetchVehicleData(loadLocal = false) {
     let windows = vehicleStatus.windowPosition;
     //console.log("windows:", JSON.stringify(windows));
     vehicleData.statusWindows = {
-        leftFront: windows.driverWindowPosition ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.driverWindowPosition.value) : false,
-        rightFront: windows.passWindowPosition ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.passWindowPosition.value) : false,
-        leftRear: windows.rearDriverWindowPos ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.rearDriverWindowPos.value) : false,
-        rightRear: windows.rearPassWindowPos ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.rearPassWindowPos.value) : false,
+        leftFront: windows && windows.driverWindowPosition ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.driverWindowPosition.value) : false,
+        rightFront: windows && windows.passWindowPosition ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.passWindowPosition.value) : false,
+        leftRear: windows && windows.rearDriverWindowPos ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.rearDriverWindowPos.value) : false,
+        rightRear: windows && windows.rearPassWindowPos ? !['Fully_Closed', 'Fully closed position', 'Undefined window position', 'Undefined'].includes(windows.rearPassWindowPos.value) : false,
     };
 
     //true means, that door is open
