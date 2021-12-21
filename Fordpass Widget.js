@@ -2556,7 +2556,7 @@ async function clearFileManager() {
 }
 
 async function getLatestScriptVersion() {
-    let req = new Request(`https://raw.githubusercontent.com/whendric/fordpass-scriptable/main/latest.json`);
+    let req = new Request(`https://raw.githubusercontent.com/tonesto7/fordpass-scriptable/main/latest.json`);
     req.headers = {
         'Content-Type': 'application/json',
         'Accept-Language': 'en-US,en;q=0.9',
